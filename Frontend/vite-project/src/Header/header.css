@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    font-family:"Inter", sans-serif;
+    background-color: #f8f8f8;
+}
+
+.logo h1 {
+    margin: 0;
+    font-weight: 400;
+    color: #040000;
+}
+
+.hitems {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    font-size: medium;
+}
+
+.hi1 {
+    margin: 0;
+    padding: 10px;
+    color: #666;
+    cursor: pointer;
+    border-radius: 4px; /* Optional: for slightly rounded corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.hi1:hover {
+    background-color: #d3d3d3; /* Light grey background on hover */
+    color: #000; /* Black text color on hover */
+}
+
+.profile-button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.profile-button:hover {
+    background-color: #333;
+}
