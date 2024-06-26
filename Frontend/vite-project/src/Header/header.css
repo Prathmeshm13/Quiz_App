@@ -4,7 +4,7 @@
     align-items: center;
     padding: 25px;
     font-family:"Inter", sans-serif;
-    background-color: #f8f8f8;
+    background-color: #cecece;
 }
 
 .logo h1 {
@@ -30,7 +30,7 @@
 }
 
 .hi1:hover {
-    background-color: #d3d3d3; /* Light grey background on hover */
+    background-color: #fffefe; /* Light grey background on hover */
     color: #000; /* Black text color on hover */
 }
 

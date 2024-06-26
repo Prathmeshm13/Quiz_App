@@ -4,6 +4,9 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
+import SignUp from './SignUp/Signup'
+import Details from './SignUp/Details'
+import Login from './SignUp/Login'
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 </style>
@@ -13,7 +16,7 @@ function App() {
   return (
     <>
     <Header></Header>
-    <div className='test'></div>
+    <Login/>
     <Footer></Footer>
     </>
   )
