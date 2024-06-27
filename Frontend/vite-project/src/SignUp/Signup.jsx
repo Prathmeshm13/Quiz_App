@@ -2,12 +2,7 @@ import React from "react";
 import "./signup.css";
 
 function SignUp() {
-    function handleSubmit(){
-        
-    }
-    function handleChange(){
-
-    }
+    
   return (
     <div className="maincont">
       <div className="heading">Create an account</div>
