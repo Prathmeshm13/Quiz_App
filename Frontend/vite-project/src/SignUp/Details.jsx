@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import "./signup.css";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Details() {
-    const [name, setName] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [instituteName, setInstituteName] = useState('');
-    const [passingYear, setPassingYear] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+const navigate=useNavigate();
+    let [name, setName] = useState('');
+    let [username, setUsername] = useState('');
+    let [email, setEmail] = useState('');
+    let [password, setPassword] = useState('');
+    let [confirmPassword, setConfirmPassword] = useState('');
+    let [instituteName, setInstituteName] = useState('');
+    let [passingYear, setPassingYear] = useState('');
+    let [loading, setLoading] = useState(false);
+    let [error, setError] = useState('');
 
     const handleSignUp = (e) => {
         e.preventDefault(); // Prevent default form submission behavior
@@ -42,6 +44,7 @@ function Details() {
             .post('http://localhost:8000/user/signup', data)
             .then(() => {
                 setLoading(false);
+                navigate('/quiz/create-quiz'); // Redirect to create quiz page on successful sign-up
             })
             .catch((error) => {
                 setLoading(false);
@@ -49,7 +52,6 @@ function Details() {
                 console.log(error);
             });
     };
-
     return (
         <div className="maincont">
             <div className="heading">Enter your details</div>
