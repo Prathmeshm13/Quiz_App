@@ -5,14 +5,13 @@ const { v4: uuidv4 } = require('uuid');
 const { getUser, setUser } = require('../service/auth');
 
 router.post('/signup', async (req, res) => {
-    const { name, email, username, password, instituteName, passingYear } = req.body;
+    const { name, email, username, instituteName, passingYear } = req.body;
     console.log('Signup request body:', req.body);
     try {
         const user = await User.create({
             fullName: name,
             email: email,
             username: username,
-            password: password,
             instituteName: instituteName,
             passingYear: passingYear,
             scores: [],

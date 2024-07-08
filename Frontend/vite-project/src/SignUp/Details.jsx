@@ -8,8 +8,6 @@ const navigate=useNavigate();
     let [name, setName] = useState('');
     let [username, setUsername] = useState('');
     let [email, setEmail] = useState('');
-    let [password, setPassword] = useState('');
-    let [confirmPassword, setConfirmPassword] = useState('');
     let [instituteName, setInstituteName] = useState('');
     let [passingYear, setPassingYear] = useState('');
     let [loading, setLoading] = useState(false);
@@ -19,13 +17,8 @@ const navigate=useNavigate();
         e.preventDefault(); // Prevent default form submission behavior
 
         // Simple form validation
-        if (!name || !username || !email || !password || !confirmPassword || !instituteName || !passingYear) {
+        if (!name || !username || !email || !instituteName || !passingYear) {
             setError('Please fill out all fields.');
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            setError('Passwords do not match.');
             return;
         }
 
@@ -33,7 +26,6 @@ const navigate=useNavigate();
             name,
             email,
             username,
-            password,
             instituteName,
             passingYear
         };
@@ -88,26 +80,6 @@ const navigate=useNavigate();
                             placeholder="Zapatlela@marathi.com"
                             className="email-input"
                             onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        <div className="label">Password</div>
-                        <input
-                            name="password"
-                            type="password"
-                            placeholder="password"
-                            className="email-input"
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        <div className="label">Confirm Password</div>
-                        <input
-                            name="confirmPassword"
-                            type="password"
-                            placeholder="password"
-                            className="email-input"
-                            onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </label>
                     <label>
