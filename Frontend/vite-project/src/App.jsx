@@ -7,6 +7,7 @@ import QuizForm from './CreateQuiz/CreateQuiz';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from './Layout';
 import AddQuestionForm from './CreateQuiz/Create Questions/CreateQuestion';
+import Login from './SignUp/Login';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="signup" element={<Details />} />
+            <Route path="login" element={<Login />} />
             <Route path="quiz/create-quiz" element={<QuizForm />} />
             <Route path="quiz/add-question" element={<AddQuestionForm/>} />
           </Route>

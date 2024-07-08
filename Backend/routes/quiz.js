@@ -2,8 +2,8 @@ const express=require("express");
 const mongoose=require("mongoose")
 const { Quiz } = require("../models/quiz");
 const router=express.Router();
-
-router.post("/createquiz",async (req,res)=>{
+const { restricttousers }=require("../middlewares/auth")
+router.post("/createquiz", async (req,res)=>{
     let{quizName,
     quizType,
     genre,
