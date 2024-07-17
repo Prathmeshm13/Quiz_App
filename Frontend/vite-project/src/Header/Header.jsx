@@ -3,13 +3,16 @@ import './header.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setUser, setUserDetails } from '../../features/quiz';
 
 function Header() {
   const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const navigate = useNavigate();
   const [userExists, setUserExists] = useState(false);
   const [loading, setLoading] = useState(true); // To handle the loading state
-
+  const dispatch=useDispatch();
+  const [userdetails,setdetails]=useState({});
   const handleLogin = async () => {
     await loginWithRedirect({
       screen_hint: 'login',
@@ -26,6 +29,7 @@ function Header() {
   const checkUserExists = async (email) => {
     try {
       const response = await axios.get(`http://localhost:8000/api/check-user?email=${email}`);
+      dispatch(setUserDetails(response.data.user));
       return response.data.exists;
     } catch (error) {
       console.error('Error checking user existence:', error);
@@ -41,6 +45,7 @@ function Header() {
         setLoading(false);
         if (exists) {
           navigate('/');
+          dispatch(setUser(user.email));
         } else {
           navigate('/signup');
         }
@@ -68,6 +73,7 @@ function Header() {
             <div className='hi1'>About Us</div>
             <div className='hi1' onClick={() => navigate('/')}>Explore</div>
             <div className='hi1' onClick={() => navigate('quiz/create-quiz')}>Create Quiz</div>
+            <div className='hi1' onClick={() => navigate('quiz')}>Dashboard</div>
           </>
         )}
         {!isAuthenticated && (

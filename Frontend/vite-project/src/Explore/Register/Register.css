@@ -1,0 +1,11 @@
+.cont{
+    display: flex;
+}
+.sshead{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.but{
+    display: flex;
+}

@@ -34,13 +34,13 @@ const QuizForm = () => {
     e.preventDefault();
     console.log(formData);
     // Simple form validation
-    if (!formData.quizName || !formData.quizType || !formData.genre || !formData.quizDate || !formData.quizDuration || !formData.numQuestions || !formData.scoreCorrect || !formData.scoreIncorrect) {
-      setError('Please fill out all fields.');
-      return;
-    }
     setLoading(true);
     axios
-      .post('http://localhost:8000/quiz/createquiz', formData)
+      .post('http://localhost:8000/quiz/createquiz', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       .then(() => {
         setLoading(false);
         navigate('/'); // Redirect to create quiz page on successful sign-up

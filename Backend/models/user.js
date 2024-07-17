@@ -23,6 +23,9 @@ const userSchema=mongoose.Schema({
     },
     quizesAttempted:{
         type:Array
+    },
+    quizesRegistered:{
+        type:Array
     }
 },{timestamps:true});
 

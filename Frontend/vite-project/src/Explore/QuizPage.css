@@ -1,0 +1,92 @@
+.quiz-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+    padding: 20px;
+    width: 1000px;
+    font-family: Arial, sans-serif;
+    margin: auto;
+  }
+  
+  .upcoming-quizzes{
+    display: flex;
+    margin: auto;
+    flex-direction: row;
+  }
+  .past-quizzes {
+    flex-direction: row;
+    margin-bottom: 40px;
+    width: 750px;
+  }
+  .btcont{
+    display: flex;
+    flex-direction: row;
+  }
+  h2{
+    display: block;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .quiz-card {
+    display: flex;
+    width: 300px;
+    height: 150px;
+    background: #f0f0f0;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .quiz-info h3 {
+    font-size: 18px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .quiz-info p {
+    font-size: 14px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .register-button {
+    padding: 8px 16px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .register-button:hover {
+    background-color: #333;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead th {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  tbody tr {
+    background-color: #d0d0d0;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  tbody td {
+    padding: 10px;
+  }
+  
+  tbody tr:hover {
+    background-color: #b0b0b0;
+  }
+  

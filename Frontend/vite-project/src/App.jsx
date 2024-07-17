@@ -8,6 +8,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from './Layout';
 import AddQuestionForm from './CreateQuiz/Create Questions/CreateQuestion';
 import Login from './SignUp/Login';
+import Home from './Home/Home';
+import Explore from './Explore/Explore';
+import QuizPage from './Explore/Explore2';
+import Quiz from './Quiz/Quiz';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,10 +21,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
+            <Route path="" element={<Home/>} />
             <Route path="signup" element={<Details />} />
             <Route path="login" element={<Login />} />
             <Route path="quiz/create-quiz" element={<QuizForm />} />
             <Route path="quiz/add-question" element={<AddQuestionForm/>} />
+            <Route path="/explore" element={<QuizPage/>} />
+            <Route path="/quiz" element={<Quiz/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
