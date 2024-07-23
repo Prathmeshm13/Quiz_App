@@ -44,7 +44,6 @@ function Header() {
         setUserExists(exists);
         setLoading(false);
         if (exists) {
-          navigate('/');
           dispatch(setUser(user.email));
         } else {
           navigate('/signup');

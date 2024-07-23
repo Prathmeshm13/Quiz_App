@@ -1,15 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-function RegList(props) {
+const RegList = ({ quiz, index }) => {
   return (
-    <>
-    <tr key={props.quiz.quizName}>
-    <td>{props.quiz.quizDuration}</td>
-    <td>{props.quiz.quizName}</td>
-    <td>{props.quiz.quizDate}</td>
-  </tr>
-  </>
-  )
-}
+    <tr>
+      <td>{index}</td>
+      <td>{quiz.quizName}</td>
+      <td>{new Date(quiz.quizDate).toLocaleDateString()}</td>
+      <td>{quiz.result}</td>
+    </tr>
+  );
+};
 
-export default RegList
+export default RegList;

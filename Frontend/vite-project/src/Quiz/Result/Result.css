@@ -1,0 +1,31 @@
+.result-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .result-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .result-score {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .result-score strong {
+    color: #007bff;
+  }
+  
+  .result-container:hover {
+    background-color: #e9ecef;
+    border-color: #007bff;
+  }
+  

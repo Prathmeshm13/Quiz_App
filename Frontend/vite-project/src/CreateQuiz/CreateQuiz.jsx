@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "./QuizForm.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import AddQuestionForm from "./Create Questions/CreateQuestion";
+
 
 const QuizForm = () => {
   const navigate = useNavigate();
-  let [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     quizName: "",
     quizType: "",
     genre: "",
@@ -17,9 +17,9 @@ const QuizForm = () => {
     scoreIncorrect: 0,
     ques: []
   });
-  let [loading, setLoading] = useState(false);
-  let [error, setError] = useState('');
-  let [quizCreated, setQuizCreated] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [quizCreated, setQuizCreated] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,8 +32,6 @@ const QuizForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    // Simple form validation
     setLoading(true);
     axios
       .post('http://localhost:8000/quiz/createquiz', formData, {
@@ -72,6 +70,7 @@ const QuizForm = () => {
       ques: [...prevFormData.ques, newQuestion]
     }));
   };
+
   return (
     <>
       {!quizCreated && (
@@ -124,9 +123,9 @@ const QuizForm = () => {
               </div>
               <div className="sub-form">
                 <div className="form-group">
-                  <label htmlFor="quizDuration">Quiz Duration(in mins):</label>
+                  <label htmlFor="quizDuration">Quiz Duration (in mins):</label>
                   <input
-                    type="Number"
+                    type="number"
                     id="quizDuration"
                     name="quizDuration"
                     value={formData.quizDuration}
@@ -136,7 +135,7 @@ const QuizForm = () => {
                 <div className="form-group">
                   <label htmlFor="numQuestions">No. of Questions:</label>
                   <input
-                    type="Number"
+                    type="number"
                     id="numQuestions"
                     name="numQuestions"
                     value={formData.numQuestions}
@@ -146,7 +145,7 @@ const QuizForm = () => {
                 <div className="form-group">
                   <label htmlFor="scoreCorrect">Score for correct answer:</label>
                   <input
-                    type="Number"
+                    type="number"
                     id="scoreCorrect"
                     name="scoreCorrect"
                     value={formData.scoreCorrect}
@@ -154,11 +153,9 @@ const QuizForm = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="scoreIncorrect">
-                    Score for incorrect answer:
-                  </label>
+                  <label htmlFor="scoreIncorrect">Score for incorrect answer:</label>
                   <input
-                    type="Number"
+                    type="number"
                     id="scoreIncorrect"
                     name="scoreIncorrect"
                     value={formData.scoreIncorrect}
@@ -168,21 +165,20 @@ const QuizForm = () => {
               </div>
             </div>
             <div className="button-group">
-              <button type="button" onClick={handleQuestionformrender}>Add Questions</button>
-              <button type="button" onClick={handleCancel}>
-                Cancel
-              </button>
+              <button type="button" className="add-questions-btn" onClick={handleQuestionformrender}>Add Questions</button>
+              <button type="button" className="cancel-btn" onClick={handleCancel}>Cancel</button>
             </div>
           </form>
+          {error && <p className="error-message">{error}</p>}
         </div>
       )}
       {quizCreated && formData.ques.length < formData.numQuestions && (
-        <AddQuestionForm questoCreate={formData.numQuestions} addQuestion={addQuestion} />
+        <CreateQuestion questoCreate={formData.numQuestions} addQuestion={addQuestion} />
       )}
-      {quizCreated && formData.ques.length == formData.numQuestions && (
+      {quizCreated && formData.ques.length === formData.numQuestions && (
         <div className="quiz-form">
           <div className="button-group">
-            <button onClick={handleSubmit}>Create Quiz</button>
+            <button className="create-quiz-btn" onClick={handleSubmit}>Create Quiz</button>
           </div>
         </div>
       )}

@@ -1,0 +1,67 @@
+.instructions-container {
+    margin: 40px auto;
+    padding: 30px;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .instructions-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .instructions-text {
+    font-size: 18px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+  
+  .instructions-list, .guidelines-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+  }
+  
+  .instructions-list li, .guidelines-list li {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .instructions-list li strong, .guidelines-list li strong {
+    font-weight: bold;
+  }
+  
+  .guidelines-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .good-luck {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .start-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .start-button:hover {
+    background-color: #0056b3;
+  }
+  

@@ -8,23 +8,52 @@ import { setcurrentquiz } from '../../features/quiz';
 function QuizCard(props) {
   const [registered, setReg] = useState(false);
   const [quizStarted, setQuizStarted] = useState(false);
+  const [quizAttempted, setQuizAttempted] = useState(false);
+  const [quizScore, setQuizScore] = useState(0);
   const userdetails = useSelector(state => state.userdetails);
-  const [userQuizzes, setUserQuizzes] = useState(userdetails.quizesRegistered || []);
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    checkifQuizStarted();
-  }, []);
+    if (userdetails && props.quiz) {
+      checkifQuizStarted();
+      checkifQuizAttempted(props.quiz);
+      checkifQuizReg();
+    }
+    console.log(userdetails);
+    console.log(registered);
+    console.log(quizStarted);
+    console.log(quizAttempted);
+  }, [userdetails, props.quiz]);
 
   function checkifQuizStarted() {
     const quizStartTime = new Date(props.quiz.quizDate);
     const quizEndTime = new Date(quizStartTime.getTime() + props.quiz.quizDuration * 60000);
     const currentTime = new Date();
     console.log(props.quiz.quizName);
-    if (currentTime >= quizStartTime && currentTime <= quizEndTime) {
-      setQuizStarted(true);
+    setQuizStarted(currentTime >= quizStartTime && currentTime <= quizEndTime);
+  }
+
+  function checkifQuizReg() {
+    if (userdetails && Array.isArray(userdetails.quizesRegistered)) {
+      const quizRegistered = userdetails.quizesRegistered.includes(props.quiz._id);
+      setReg(quizRegistered);
     } else {
-      setQuizStarted(false);
+      setReg(false);
+    }
+  }
+
+  function checkifQuizAttempted(quiz) {
+    console.log(userdetails.quizesAttempted);
+    if (userdetails && Array.isArray(userdetails.quizesAttempted)) {
+      const attemptedQuiz = userdetails.quizesAttempted.find(obj => obj.quizId === quiz._id);
+      console.log(attemptedQuiz);
+      if (attemptedQuiz) {
+        setQuizScore(attemptedQuiz.score);
+        setQuizAttempted(true);
+      } else {
+        setQuizAttempted(false);
+      }
     }
   }
 
@@ -32,31 +61,38 @@ function QuizCard(props) {
     try {
       await axios.post(`http://localhost:8000/quiz/register?email=${userdetails.email}&quizId=${props.quiz._id}`);
       console.log('Registration sent successfully');
-      setUserQuizzes(prev => [...prev, props.quiz._id]);
+      const newQuizzes = [...userdetails.quizesRegistered, props.quiz._id];
+      // Update the state and set registered to true
+      userdetails.quizesRegistered = newQuizzes;
       setReg(true);
     } catch (error) {
       console.error('Error registering for quiz:', error);
     }
   }
-  async function handleStartQuiz(e){
-    console.log(e)
+
+  async function handleStartQuiz(e) {
+    console.log(e);
     dispatch(setcurrentquiz(e));
     navigate('/quiz');
   }
+
   return (
     <div className="quiz-card">
       <div className="quiz-info">
         <h3>{props.quiz.quizName}</h3>
         <p>{props.quiz.quizDate}</p>
-        <div className='btcont'>
-          {props.quiz && userdetails && !userQuizzes.includes(props.quiz._id) && (
-            <button className='but' onClick={handleRegister}>Register</button>
+        <div className="btcont">
+          {props.quiz && userdetails && !registered && !quizAttempted && (
+            <button className="but" onClick={handleRegister}>Register</button>
           )}
-          {props.quiz && userdetails && userQuizzes.includes(props.quiz._id) && (
-            <button className='but' disabled>Registered</button>
+          {props.quiz && userdetails && registered && !quizAttempted && (
+            <button className="but" disabled>Registered</button>
           )}
-          {props.quiz && userdetails && userQuizzes.includes(props.quiz._id)&& quizStarted && (
-            <button className='but' onClick={()=>handleStartQuiz(props.quiz)}>Start Quiz</button>
+          {props.quiz && userdetails && registered && quizStarted && !quizAttempted && (
+            <button className="but" onClick={() => handleStartQuiz(props.quiz)}>Start Quiz</button>
+          )}
+          {props.quiz && userdetails && registered && quizAttempted && (
+            <button className="but" disabled>Score: {quizScore}</button>
           )}
         </div>
       </div>
@@ -65,4 +101,3 @@ function QuizCard(props) {
 }
 
 export default QuizCard;
-

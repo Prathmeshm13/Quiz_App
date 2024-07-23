@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateQuestion.css";
 
-const AddQuestionForm = (props) => {
+const CreateQuestion = (props) => {
   const [quests, setQuests] = useState([]);
   const [questionType, setQuestionType] = useState("");
   const [questionText, setQuestionText] = useState("");
@@ -153,4 +153,4 @@ const AddQuestionForm = (props) => {
   );
 };
 
-export default AddQuestionForm;
+export default CreateQuestion;

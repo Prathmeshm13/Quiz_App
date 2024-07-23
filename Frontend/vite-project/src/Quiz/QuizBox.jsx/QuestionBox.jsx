@@ -27,7 +27,7 @@ const QuestionBox = ({ question, questionIndex, totalQuestions, handleNext, hand
     <div className="quiz-container">
       <h2>{question?.questionText}</h2>
       <div className="question-container">
-        {question?.options.map((option, index) => (
+        {question?.options?.map((option, index) => (
           <div className="option" key={index}>
             <button 
               className={`option-button ${selectedOption === index ? 'selected' : ''}`} 

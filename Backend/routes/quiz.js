@@ -80,4 +80,25 @@ router.post("/register", async (req, res) => {
         res.status(500).send({ message: "Internal server error" });
     }
 });
+router.post("/finish",async(req,res)=>{
+    console.log("Received data:", req.body)
+    try {
+        let qq = await User.findOne({email:req.body.email});
+        if (!qq) {
+            return res.status(404).send({ message: "User not found" });
+        }
+        let allquizes = qq.quizesAttempted;
+        // if (!allquizes.some(obj=>obj.hasOwnProperty(req.body.quizId))) {
+        //     allquizes.push(req.body);
+        // }
+        allquizes.push(req.body);
+        console.log(allquizes);
+        await User.findOneAndUpdate({email:req.body.email}, {quizesAttempted:allquizes});
+
+        res.status(200).send({ message: "Quiz registered successfully" });
+    } catch (error) {
+        console.error('Error updating score:', error);
+        res.status(500).send({ message: "Internal server error" });
+    }
+})
 module.exports = router;

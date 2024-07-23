@@ -17,14 +17,14 @@ const QuizPage = () => {
     dispatch(fetchQuizzes());
     const currentDate = new Date();
     setTodayDate(currentDate);
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     // Sort quizzes based on quizDate when quizes state updates
     if (quizes && quizes.length > 0) {
       const sortedQuizzes = [...quizes].sort((a, b) => new Date(a.quizDate) - new Date(b.quizDate));
       // Filter only upcoming quizzes
-      const upcoming = sortedQuizzes.filter(quiz => new Date(quiz.quizDate) >= new Date(new Date().getTime()-quiz.quizDuration*60000));
+      const upcoming = sortedQuizzes.filter(quiz => new Date(quiz.quizDate) >= new Date(new Date().getTime() - quiz.quizDuration * 60000));
       setUpcomingQuizzes(upcoming.slice(0, 2)); // Take only the first two upcoming quizzes
     }
   }, [quizes, todaydate]);
@@ -34,7 +34,7 @@ const QuizPage = () => {
       <h2>Upcoming Quizzes</h2>
       <div className="upcoming-quizzes">
         {upcomingQuizzes.map((quiz) => (
-          <div key={quiz.id}><QuizCard quiz={quiz} userEmail={user} /></div>
+          <div key={quiz.id}><QuizCard quiz={quiz} userEmail={user.email} /></div>
         ))}
       </div>
       <div className="past-quizzes">
@@ -49,8 +49,8 @@ const QuizPage = () => {
             </tr>
           </thead>
           <tbody>
-            {quizes && quizes.map((quiz) => (
-              <RegList key={quiz.id} quiz={quiz} />
+            {quizes && quizes.map((quiz, index) => (
+              <RegList key={quiz.id} quiz={quiz} index={index + 1} />
             ))}
           </tbody>
         </table>
