@@ -41,7 +41,7 @@ function Quiz() { // Make sure state.quizzes exists and is an array
     setquizFinished(true,{ state: { score: scored } });
     setScore(scored);
     const formData={
-    score:scored,
+    score:(scored/currentQuiz.numQuestions*currentQuiz.scoreCorrect)*100,
     quizId:currentQuiz._id,
     email:userdetails.email
     }

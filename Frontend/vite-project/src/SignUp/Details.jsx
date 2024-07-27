@@ -36,7 +36,7 @@ const navigate=useNavigate();
             .post('http://localhost:8000/user/signup', data)
             .then(() => {
                 setLoading(false);
-                navigate('/quiz/create-quiz'); // Redirect to create quiz page on successful sign-up
+                navigate('/'); // Redirect to create quiz page on successful sign-up
             })
             .catch((error) => {
                 setLoading(false);

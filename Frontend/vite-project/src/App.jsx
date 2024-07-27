@@ -12,6 +12,7 @@ import Home from './Home/Home';
 import Explore from './Explore/Explore';
 import QuizPage from './Explore/Explore2';
 import Quiz from './Quiz/Quiz';
+import Leaderboard from './Leaderboard/Leaderboard';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -28,6 +29,7 @@ function App() {
             <Route path="quiz/add-question" element={<AddQuestionForm/>} />
             <Route path="/explore" element={<QuizPage/>} />
             <Route path="/quiz" element={<Quiz/>}></Route>
+            <Route path='/leaderboard'element={<Leaderboard/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -38,8 +38,6 @@ function QuizCard(props) {
     if (userdetails && Array.isArray(userdetails.quizesRegistered)) {
       const quizRegistered = userdetails.quizesRegistered.includes(props.quiz._id);
       setReg(quizRegistered);
-    } else {
-      setReg(false);
     }
   }
 
@@ -58,13 +56,13 @@ function QuizCard(props) {
   }
 
   async function handleRegister() {
+    setReg(true);
     try {
       await axios.post(`http://localhost:8000/quiz/register?email=${userdetails.email}&quizId=${props.quiz._id}`);
       console.log('Registration sent successfully');
       const newQuizzes = [...userdetails.quizesRegistered, props.quiz._id];
       // Update the state and set registered to true
       userdetails.quizesRegistered = newQuizzes;
-      setReg(true);
     } catch (error) {
       console.error('Error registering for quiz:', error);
     }

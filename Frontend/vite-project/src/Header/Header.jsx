@@ -41,7 +41,7 @@ function Header() {
     const handleRedirect = async () => {
       if (isAuthenticated && user) {
         const exists = await checkUserExists(user.email);
-        setUserExists(exists);
+        await setUserExists(exists);
         setLoading(false);
         if (exists) {
           dispatch(setUser(user.email));
@@ -63,14 +63,14 @@ function Header() {
   return (
     <div className='container'>
       <div className='logo'>
-        <h1>Quizzo.com</h1>
+        <h1 onClick={() => navigate('')} >Quizzo.com</h1>
       </div>
       <div className='hitems'>
         {isAuthenticated && userExists && (
           <>
-            <div className='hi1'>Leaderboard</div>
+            <div className='hi1' onClick={() => navigate('/leaderboard')}>Leaderboard</div>
             <div className='hi1'>About Us</div>
-            <div className='hi1' onClick={() => navigate('/')}>Explore</div>
+            <div className='hi1' onClick={() => navigate('explore')}>Explore</div>
             <div className='hi1' onClick={() => navigate('quiz/create-quiz')}>Create Quiz</div>
             <div className='hi1' onClick={() => navigate('quiz')}>Dashboard</div>
           </>

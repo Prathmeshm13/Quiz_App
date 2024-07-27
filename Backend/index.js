@@ -50,6 +50,25 @@ app.get('/allquizes',async(req,res)=>{
     JSON.stringify(quizes);
     res.json(quizes);
 })
+app.get('/allscores', async (req, res) => {
+    try {
+        const users = await User.find({});
+        let scores = {};
+
+        users.forEach(user => {
+            const totalScores = user.quizesAttempted.reduce((total, quiz) => total + quiz.score, 0);
+            const averageScore = user.quizesAttempted.length ? totalScores / user.quizesAttempted.length : 0;
+            
+            scores[user.fullName] = averageScore;
+        });
+
+        res.json(scores);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 app.listen(PORT, () => {
     console.log("Server started");
 });
