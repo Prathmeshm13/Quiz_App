@@ -68,11 +68,11 @@ function Header() {
       <div className='hitems'>
         {isAuthenticated && userExists && (
           <>
-            <div className='hi1' onClick={() => navigate('/leaderboard')}>Leaderboard</div>
-            <div className='hi1'>About Us</div>
+            {/* <div className='hi1' onClick={() => navigate('/leaderboard')}>Leaderboard</div> */}
+            {/* <div className='hi1'>About Us</div> */}
             <div className='hi1' onClick={() => navigate('explore')}>Explore</div>
             <div className='hi1' onClick={() => navigate('quiz/create-quiz')}>Create Quiz</div>
-            <div className='hi1' onClick={() => navigate('quiz')}>Dashboard</div>
+            {/* <div className='hi1' onClick={() => navigate('quiz')}>Dashboard</div> */}
           </>
         )}
         {!isAuthenticated && (

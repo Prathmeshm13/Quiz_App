@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./QuizForm.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import CreateQuestion from "./Create Questions/CreateQuestion";
 
 const QuizForm = () => {
   const navigate = useNavigate();
@@ -26,28 +26,28 @@ const QuizForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleQuestionformrender = () => {
+  const handleQuestionFormRender = () => {
     setQuizCreated(true);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    axios
-      .post('http://localhost:8000/quiz/createquiz', formData, {
+    setError('');
+    
+    try {
+      await axios.post('http://localhost:8000/quiz/createquiz', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
-      })
-      .then(() => {
-        setLoading(false);
-        navigate('/'); // Redirect to create quiz page on successful sign-up
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError('An error occurred. Please check the console for details.');
-        console.log(error);
       });
+      setLoading(false);
+      navigate('/'); // Redirect to home page after quiz creation
+    } catch (error) {
+      setLoading(false);
+      setError('An error occurred while creating the quiz. Please try again.');
+      console.error(error);
+    }
   };
 
   const handleCancel = () => {
@@ -72,11 +72,11 @@ const QuizForm = () => {
   };
 
   return (
-    <>
-      {!quizCreated && (
+    <div className="quiz-form-container">
+      {!quizCreated ? (
         <div className="quiz-form">
           <h1>Create Quiz</h1>
-          <p>Enter all the necessary details</p>
+          <p>Enter all the necessary details to create the quiz</p>
           <form onSubmit={handleSubmit}>
             <div className="form-grid">
               <div className="sub-form">
@@ -88,6 +88,7 @@ const QuizForm = () => {
                     name="quizName"
                     value={formData.quizName}
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -98,6 +99,7 @@ const QuizForm = () => {
                     name="quizType"
                     value={formData.quizType}
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -108,6 +110,7 @@ const QuizForm = () => {
                     name="genre"
                     value={formData.genre}
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -118,9 +121,11 @@ const QuizForm = () => {
                     name="quizDate"
                     value={formData.quizDate}
                     onChange={handleChange}
+                    required
                   />
                 </div>
               </div>
+
               <div className="sub-form">
                 <div className="form-group">
                   <label htmlFor="quizDuration">Quiz Duration (in mins):</label>
@@ -130,6 +135,7 @@ const QuizForm = () => {
                     name="quizDuration"
                     value={formData.quizDuration}
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -140,6 +146,7 @@ const QuizForm = () => {
                     name="numQuestions"
                     value={formData.numQuestions}
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -150,6 +157,7 @@ const QuizForm = () => {
                     name="scoreCorrect"
                     value={formData.scoreCorrect}
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -160,29 +168,35 @@ const QuizForm = () => {
                     name="scoreIncorrect"
                     value={formData.scoreIncorrect}
                     onChange={handleChange}
+                    required
                   />
                 </div>
               </div>
             </div>
+
             <div className="button-group">
-              <button type="button" className="add-questions-btn" onClick={handleQuestionformrender}>Add Questions</button>
-              <button type="button" className="cancel-btn" onClick={handleCancel}>Cancel</button>
+              <button type="button" className="add-questions-btn" onClick={handleQuestionFormRender}>
+                Add Questions
+              </button>
+              <button type="button" className="cancel-btn" onClick={handleCancel}>
+                Cancel
+              </button>
             </div>
+
+            {loading && <p>Loading...</p>}
+            {error && <p className="error-message">{error}</p>}
           </form>
-          {error && <p className="error-message">{error}</p>}
         </div>
-      )}
-      {quizCreated && formData.ques.length < formData.numQuestions && (
+      ) : formData.ques.length < formData.numQuestions ? (
         <CreateQuestion questoCreate={formData.numQuestions} addQuestion={addQuestion} />
-      )}
-      {quizCreated && formData.ques.length === formData.numQuestions && (
+      ) : (
         <div className="quiz-form">
           <div className="button-group">
             <button className="create-quiz-btn" onClick={handleSubmit}>Create Quiz</button>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

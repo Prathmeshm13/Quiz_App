@@ -90,7 +90,7 @@ function QuizCard(props) {
             <button className="but" onClick={() => handleStartQuiz(props.quiz)}>Start Quiz</button>
           )}
           {props.quiz && userdetails && registered && quizAttempted && (
-            <button className="but" disabled>Score: {quizScore}</button>
+            <button className="but" disabled>Attempted</button>
           )}
         </div>
       </div>

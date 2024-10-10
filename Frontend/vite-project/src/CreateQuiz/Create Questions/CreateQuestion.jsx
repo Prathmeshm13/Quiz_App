@@ -47,13 +47,7 @@ const CreateQuestion = (props) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    // Simple form validation
-    if (!questionType || !questionText || (questionType === "mcq" && (!answer || options.includes("")))) {
-      setError('Please fill out all fields.');
-      return;
-    }
-
+    e.preventDefault();
     const formData = {
       questionType,
       questionText,

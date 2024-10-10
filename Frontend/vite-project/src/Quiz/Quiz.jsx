@@ -27,17 +27,20 @@ function Quiz() { // Make sure state.quizzes exists and is an array
   };
   const handleFinish = () => {
     let scored = 0;
-    let ci = 0;
-  
-    answers.forEach((answer) => {
-      if (answer && Number(answer) == Number(currentQuiz.questions[ci].correctOption-1)) {
-        scored += currentQuiz.scoreCorrect;
-      } else if(answer) {
-        scored += currentQuiz.scoreIncorrect;
+
+    console.log(answers);
+    answers.forEach((answer, index) => {
+      console.log(answer);
+      console.log(currentQuiz.questions[index].correctOption);
+      
+      // Ensure both 'answer' and 'correctOption' are numbers for comparison
+      if (answer !== null && Number(answer) === Number(currentQuiz.questions[index].correctOption)) {
+        scored += Number(currentQuiz.scoreCorrect);
+      } else if (answer !== null) {
+        scored += Number(currentQuiz.scoreIncorrect);
       }
-      ci++;
     });
-  
+    
     setquizFinished(true,{ state: { score: scored } });
     setScore(scored);
     const formData={
